@@ -1,30 +1,16 @@
 'use strict';
 
-class StringBuilder {
-  #value;
+const nameInputField = document.getElementById('name-input');
+const newNameOutputText = document.getElementById('name-output');
 
-  constructor(initialValue) {
-    this.#value = initialValue;
-  }
-  getValue() {
-    return this.#value;
-  }
-  padEnd(str) {
-    return (this.#value = this.#value + str);
-  }
-  padStart(str) {
-    return (this.#value = str + this.#value);
-  }
-  padBoth(str) {
-    return (this.#value = str + this.#value + str);
+nameInputField.addEventListener('input', handleInput);
+
+function handleInput(event) {
+  const trimmedValue = event.currentTarget.value.trim();
+
+  if (trimmedValue !== '') {
+    newNameOutputText.textContent = trimmedValue;
+  } else {
+    newNameOutputText.textContent = 'Anonymous';
   }
 }
-
-const builder = new StringBuilder('.');
-console.log(builder.getValue()); // "."
-builder.padStart('^');
-console.log(builder.getValue()); // "^."
-builder.padEnd('^');
-console.log(builder.getValue()); // "^.^"
-builder.padBoth('=');
-console.log(builder.getValue()); // "=^.^="
